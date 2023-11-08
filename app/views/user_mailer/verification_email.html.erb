@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Account Verification</title>
+</head>
+<body>
+  <h1>Welcome to Your App!</h1>
+  <p>
+    Thank you for signing up! To verify your account, please click the link below:
+  </p>
+  <a href="<%= email_verification_url(@user.verification_token, host: 'localhost:3000')%>">
+    Verify Your Account
+  </a>
+  <p>
+    If you did not sign up for this account, you can safely ignore this email.
+  </p>
+</body>
+</html>
