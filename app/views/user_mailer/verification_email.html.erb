@@ -12,6 +12,12 @@
   <a href="<%= email_verification_url(@user.verification_token, host: 'localhost:3000')%>">
     Verify Your Account
   </a>
+  <br>
+  <br>
+  <br>
+  <a href="<%= resend_url(email: @user.email) %>">
+  Resend Verification Email
+  </a>
   <p>
     If you did not sign up for this account, you can safely ignore this email.
   </p>
