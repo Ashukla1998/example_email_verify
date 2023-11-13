@@ -12,9 +12,11 @@ class EmailVerificationsController < ApplicationController
     def verify
         @user = User.find_by(verification_token: params[:token])
       
-        if @user && @user.errors.empty? && user.verification_sent_at < 3.minutes.ago
+        if @user && @user.errors.empty? 
           if @user.update(verified: true, verification_token: nil)
-            render json: { message: 'Email verified successfully!' }
+            # render json: { message: 'Email verified successfully!' }
+            # flash[:alert]  = "Email verified successfully!"
+            redirect_to root_path
           else
             render json: { error: @user.errors.full_messages.join(', ') }, status: :unprocessable_entity
           end

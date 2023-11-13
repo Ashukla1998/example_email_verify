@@ -4,22 +4,24 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       UserMailer.with(user: @user).verification_email.deliver_now
-      TokenValidationJob.set(wait: 3.minutes).perform_later(@user.id)
-      token = encode_token({ user_id: @user.id })
-      render json: { message: 'User created successfully. Please check your email for verification instructions.' ,token: token}, status: :ok
+      render json: { message: 'User created successfully. Please check your email for verification instructions.' }, status: :ok
     else
       render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def login
+    # debugger
     user = User.find_by(email: params[:email])
     if user && user.verified?
-      token = encode_token({ user_id: user.id })
-      render json: { message: 'Login successful.', token: token }, status: :ok
+      render json: { message: 'Login successful.'}, status: :ok
     else
       render json: { error: 'Invalid email, password, or unverified account.' }, status: :unprocessable_entity
     end
+  end
+
+  def home
+    render plain: "This is my Home page , Thankyou for visiting my website !@" 
   end
 
   private

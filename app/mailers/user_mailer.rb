@@ -4,4 +4,4 @@ class UserMailer < ApplicationMailer
       @user = params[:user]
       mail(to: @user.email, subject: 'Verify Your Account', host: 'localhost:3000')
     end
-  end
+end
